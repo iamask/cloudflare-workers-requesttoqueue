@@ -1,0 +1,20 @@
+name = "requesttoqueue"
+main = "src/worker.ts"
+compatibility_date = "2023-07-17"
+
+# Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
+# Docs: https://developers.cloudflare.com/queues/get-started
+[[queues.producers]]
+binding = "MY_QUEUE"
+queue = "my-queue"
+
+# Bind a Queue consumer. Queue Consumers can retrieve tasks scheduled by Producers to act on them.
+# Docs: https://developers.cloudflare.com/queues/get-started
+#[[queues.consumers]]
+#queue = "my-queue"
+#max_batch_size = 10 # optional: defaults to 10
+#max_batch_timeout = 5 # optional: defaults to 5 seconds
+
+ [[r2_buckets]]
+binding = 'queue-push-worker-BUCKET' # <~ valid JavaScript variable name
+bucket_name = "queue-push-worker"
